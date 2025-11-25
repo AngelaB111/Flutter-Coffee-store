@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/About.dart';
+import 'package:mobile/about.dart';
 import 'package:mobile/Home1.dart';
-import 'package:mobile/ItemDetails.dart';
 import 'package:mobile/ProductListView.dart';
-
 
 class Productlist extends StatefulWidget {
   const Productlist({super.key});
@@ -18,7 +16,7 @@ class _ProductlistState extends State<Productlist> {
       "Title": "Iced Latte",
       "subtitle": "4.0",
       "description": "Chilled milk coffee",
-      "Image": "assets/latte.png"
+      "Image": "assets/latte.png",
     },
     {
       "Title": "Frappe",
@@ -49,9 +47,7 @@ class _ProductlistState extends State<Productlist> {
   @override
   Widget build(BuildContext context) {
     const coffeeBrown = Color(0xFF774B31);
-    const cardColor = Color(0xFFDCC6B3);
     const titleColor = Color(0xFF4B2E1E);
-    const subtitleColor = Color(0xFF7B5E4A);
 
     return Scaffold(
       appBar: AppBar(
@@ -70,9 +66,11 @@ class _ProductlistState extends State<Productlist> {
               children: [
                 Home1(),
                 SizedBox(height: 20),
+
                 Productlistview(products: Products),
+
                 SizedBox(height: 20),
-                About(),
+               About(),
               ],
             ),
           ],

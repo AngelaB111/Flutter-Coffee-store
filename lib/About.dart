@@ -8,11 +8,8 @@ class About extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 400,
-
       child: Column(
-
         children: [
-
           Padding(
             padding:  const EdgeInsets.all(5),
             child: Text("About Us", style:TextStyle( fontSize: 30 ,
@@ -37,10 +34,8 @@ class About extends StatelessWidget {
                 ),),
                   Expanded(
                   child: Column(
-
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-
                       SizedBox(height: 25,),
                       Text(
                         "The Heart of Our Coffee",

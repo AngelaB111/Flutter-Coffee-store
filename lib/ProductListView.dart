@@ -14,7 +14,9 @@ class Productlistview extends StatelessWidget {
     const subtitleColor = Color(0xFF7B5E4A);
     return Column(
       children: products.map((product) {
-        return Card(
+        return
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child:   Card(
           color: cardColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -98,7 +100,7 @@ class Productlistview extends StatelessWidget {
               ],
             ),
           ),
-        );
+        ), );
       }).toList(),
     );
   }

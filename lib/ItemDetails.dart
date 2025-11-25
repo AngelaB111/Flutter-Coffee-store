@@ -98,15 +98,19 @@ class _DetailPageState extends State<DetailPage> {
                 ),
                 SizedBox(height: 20),
                 Text(
+                  widget.description,
+                  style: TextStyle(fontSize: 17, color: Color(0xFF9E7D67)),
+                ),
+                SizedBox(height: 20),
+                Text(
                   "Price: \$${price.toStringAsFixed(2)}",
-                  style: TextStyle(fontSize: 18, color: Color(0xFF774B31)),
+                  style: TextStyle(fontSize: 19, color: Color(0xFF65381D)),
                 ),
                 SizedBox(height: 10),Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Decrement button
                       IconButton(
                         icon: Icon(Icons.remove_circle_outline, color: Color(0xFF4B2E1E)),
                         onPressed: () {
@@ -124,7 +128,6 @@ class _DetailPageState extends State<DetailPage> {
                           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      // Increment button
                       IconButton(
                         icon: Icon(Icons.add_circle_outline, color: Color(0xFF4B2E1E)),
                         onPressed: () {

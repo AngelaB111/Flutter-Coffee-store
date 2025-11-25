@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'productlist.dart'; // import your Productlist page
+import 'productlist.dart'; 
 
 void main() {
   runApp(const MyApp());
