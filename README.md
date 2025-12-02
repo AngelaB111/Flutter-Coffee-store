@@ -13,5 +13,9 @@ Welcome to **Coffee Store**, your go-to web application for exploring and orderi
 
 ## Screenshots
 
-![Home Page](images/home.png)
-![Product Page](images/product.png)
+<img src="images/home.png" alt="Home Page" width="300" height:"400"/>
+
+<img src="images/about.png" alt="about Page" width="300"/>
+
+<img src="images/product.png" alt="Product Page" width="300"/>
+
