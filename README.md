@@ -13,7 +13,7 @@ Welcome to **Coffee Store**, your go-to web application for exploring and orderi
 
 ## Screenshots
 
-<img src="images/home.png" alt="Home Page" width="300" height:"400"/>
+<img src="images/home.png" alt="Home Page" width="300" />
 
 <img src="images/about.png" alt="about Page" width="300"/>
 
