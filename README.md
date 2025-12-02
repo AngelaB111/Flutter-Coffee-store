@@ -1,16 +1,17 @@
-# mobile
+# ☕ Coffee Store
 
-A new Flutter project.
+Welcome to **Coffee Store**, your go-to web application for exploring and ordering your favorite coffee blends online. This project demonstrates a modern, user-friendly interface for coffee enthusiasts to browse, select, and learn more about different coffee products.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Browse a variety of coffee blends with descriptions.
+- View prices and detailed product information.
 
-A few resources to get you started if this is your first Flutter project:
+## Technologies Used
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**Flutter**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots
+
+![Home Page](images/home.png)
+![Product Page](images/product.png)
