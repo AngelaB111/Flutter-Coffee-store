@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 class DetailPage extends StatefulWidget {
   final String title;
-  final String subtitle; // original price as string
+  final String subtitle;
   final String description;
   final String image;
   const DetailPage({
