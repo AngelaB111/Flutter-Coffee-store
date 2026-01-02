@@ -78,7 +78,7 @@ class Productlistview extends StatelessWidget {
                     child: AspectRatio(
                       aspectRatio: 1.25,
                       child: Image.asset(
-                        product["Image"] ?? 'assets/placeholder.png',
+                        "assets/${product["Image"]?.replaceFirst('/', '')}",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -131,7 +131,7 @@ class Productlistview extends StatelessWidget {
           title: product["Title"] ?? "Coffee",
           subtitle: product["subtitle"] ?? "0.00",
           description: product["description"] ?? "",
-          image: product["Image"] ?? 'assets/placeholder.png',
+          image: "assets/${product["Image"]?.replaceFirst('/', '')}",
         ),
       ),
     );
