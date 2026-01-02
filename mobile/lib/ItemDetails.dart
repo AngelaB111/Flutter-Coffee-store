@@ -27,7 +27,7 @@ class _DetailPageState extends State<DetailPage> {
   final Color primaryBrown = const Color(0xFF4B2E1E);
   final Color secondaryBrown = const Color(0xFF9E7D67);
   final Color accentBrown = const Color(0xFF774B31);
-  final Color bgColor = const Color.fromRGBO(250, 247, 242, 1);
+  final Color bgColor = const Color.fromARGB(255, 249, 248, 246);
 
   @override
   void initState() {
@@ -36,25 +36,26 @@ class _DetailPageState extends State<DetailPage> {
     price = currentBasePrice;
   }
 
-  void updatePrice(int q) {
+  void updatePrice() {
     setState(() {
-      price = currentBasePrice * q;
+      price = currentBasePrice * quantity;
     });
   }
 
   void selectSize(String size) {
     setState(() {
-      double original = double.tryParse(widget.subtitle) ?? 0.0;
+      final original = double.tryParse(widget.subtitle) ?? 0.0;
       selectedSize = size;
 
       if (size == "Small") {
         currentBasePrice = original;
       } else if (size == "Medium") {
         currentBasePrice = original + 0.75;
-      } else if (size == "Large") {
+      } else {
         currentBasePrice = original + 1.25;
       }
-      price = currentBasePrice * quantity;
+
+      updatePrice();
     });
   }
 
@@ -67,29 +68,18 @@ class _DetailPageState extends State<DetailPage> {
       appBar: AppBar(
         backgroundColor: bgColor,
         elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            IconButton(
-              icon: Icon(Icons.arrow_back, color: primaryBrown),
-              onPressed: () => Navigator.pop(context),
-            ),
-            const SizedBox(width: 5),
-            Image.asset('assets/cup1.png', width: 30, height: 30),
-            const SizedBox(width: 8),
-            Text(
-              "Coffee O'Clock",
-              style: TextStyle(
-                color: primaryBrown,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: primaryBrown),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: Text(
+          "Coffee O'Clock",
+          style: TextStyle(color: primaryBrown, fontWeight: FontWeight.bold),
         ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20),
           child: Card(
             color: Colors.white,
             elevation: 8,
@@ -97,13 +87,13 @@ class _DetailPageState extends State<DetailPage> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
                   Hero(
                     tag: widget.title,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(16),
                       child: Image.asset(
                         widget.image,
                         height: screenHeight * 0.3,
@@ -111,49 +101,60 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                   ),
+
                   const SizedBox(height: 20),
 
-                  Text(
-                    widget.title,
-                    style: TextStyle(
-                      fontSize: 28,
-                      color: primaryBrown,
-                      fontWeight: FontWeight.bold,
+                  AnimatedOpacity(
+                    duration: const Duration(milliseconds: 400),
+                    opacity: 1,
+                    child: Text(
+                      widget.title,
+                      style: TextStyle(
+                        fontSize: 28,
+                        color: primaryBrown,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 12),
+
+                  const SizedBox(height: 10),
 
                   Text(
                     widget.description,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16, color: secondaryBrown),
                   ),
+
                   const SizedBox(height: 25),
 
-                  Text(
-                    "Price: \$${price.toStringAsFixed(2)}",
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: primaryBrown,
-                      fontWeight: FontWeight.w700,
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    child: Text(
+                      "\$${price.toStringAsFixed(2)}",
+                      key: ValueKey(price),
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: primaryBrown,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
+
                   const SizedBox(height: 15),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _buildQuantityBtn(Icons.remove_circle_outline, () {
+                      _qtyBtn(Icons.remove_circle_outline, () {
                         if (quantity > 1) {
                           setState(() {
                             quantity--;
-                            updatePrice(quantity);
+                            updatePrice();
                           });
                         }
                       }),
-                      Container(
-                        width: 50,
-                        alignment: Alignment.center,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
                           quantity.toString(),
                           style: const TextStyle(
@@ -162,35 +163,25 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ),
                       ),
-                      _buildQuantityBtn(Icons.add_circle_outline, () {
+                      _qtyBtn(Icons.add_circle_outline, () {
                         setState(() {
                           quantity++;
-                          updatePrice(quantity);
+                          updatePrice();
                         });
                       }),
                     ],
                   ),
+
                   const SizedBox(height: 25),
 
+    
                   Wrap(
                     spacing: 10,
-                    alignment: WrapAlignment.center,
                     children: [
-                      _buildSizeBtn("Small"),
-                      _buildSizeBtn("Medium"),
-                      _buildSizeBtn("Large"),
+                      _sizeBtn("Small"),
+                      _sizeBtn("Medium"),
+                      _sizeBtn("Large"),
                     ],
-                  ),
-                  Hero(
-                    tag: widget.title,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        widget.image,
-                        height: MediaQuery.of(context).size.height * 0.3,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
                   ),
                 ],
               ),
@@ -200,30 +191,30 @@ class _DetailPageState extends State<DetailPage> {
       ),
       bottomNavigationBar: Container(
         color: primaryBrown,
-        padding: const EdgeInsets.symmetric(vertical: 15),
+        padding: const EdgeInsets.all(15),
         child: const Text(
           "© 2025 Coffee O'Clock",
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white, letterSpacing: 1),
+          style: TextStyle(color: Colors.white),
         ),
       ),
     );
   }
 
-  Widget _buildQuantityBtn(IconData icon, VoidCallback onPressed) {
+  Widget _qtyBtn(IconData icon, VoidCallback onTap) {
     return IconButton(
       icon: Icon(icon, color: primaryBrown, size: 30),
-      onPressed: onPressed,
+      onPressed: onTap,
     );
   }
 
-  Widget _buildSizeBtn(String size) {
-    bool isSelected = selectedSize == size;
+  Widget _sizeBtn(String size) {
+    final isSelected = selectedSize == size;
+
     return GestureDetector(
       onTap: () => selectSize(size),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
           color: isSelected ? accentBrown : Colors.white,
@@ -235,8 +226,8 @@ class _DetailPageState extends State<DetailPage> {
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 10,
+                    color: Colors.black.withOpacity(0.15),
+                    blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),
                 ]
