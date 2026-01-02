@@ -46,7 +46,7 @@ class _DetailPageState extends State<DetailPage> {
     setState(() {
       double original = double.tryParse(widget.subtitle) ?? 0.0;
       selectedSize = size;
-      
+
       if (size == "Small") {
         currentBasePrice = original;
       } else if (size == "Medium") {
@@ -79,7 +79,10 @@ class _DetailPageState extends State<DetailPage> {
             const SizedBox(width: 8),
             Text(
               "Coffee O'Clock",
-              style: TextStyle(color: primaryBrown, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: primaryBrown,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
@@ -90,14 +93,15 @@ class _DetailPageState extends State<DetailPage> {
           child: Card(
             color: Colors.white,
             elevation: 8,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
               child: Column(
                 children: [
-                  // HERO ANIMATION ADDED HERE
                   Hero(
-                    tag: widget.title, 
+                    tag: widget.title,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: Image.asset(
@@ -108,7 +112,7 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  
+
                   Text(
                     widget.title,
                     style: TextStyle(
@@ -118,14 +122,14 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  
+
                   Text(
                     widget.description,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16, color: secondaryBrown),
                   ),
                   const SizedBox(height: 25),
-                  
+
                   Text(
                     "Price: \$${price.toStringAsFixed(2)}",
                     style: TextStyle(
@@ -152,7 +156,10 @@ class _DetailPageState extends State<DetailPage> {
                         alignment: Alignment.center,
                         child: Text(
                           quantity.toString(),
-                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       _buildQuantityBtn(Icons.add_circle_outline, () {
@@ -164,8 +171,7 @@ class _DetailPageState extends State<DetailPage> {
                     ],
                   ),
                   const SizedBox(height: 25),
-                  
-                  // ANIMATED SIZE BUTTONS
+
                   Wrap(
                     spacing: 10,
                     alignment: WrapAlignment.center,
@@ -174,6 +180,17 @@ class _DetailPageState extends State<DetailPage> {
                       _buildSizeBtn("Medium"),
                       _buildSizeBtn("Large"),
                     ],
+                  ),
+                  Hero(
+                    tag: widget.title,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        widget.image,
+                        height: MediaQuery.of(context).size.height * 0.3,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -205,8 +222,8 @@ class _DetailPageState extends State<DetailPage> {
     return GestureDetector(
       onTap: () => selectSize(size),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300), 
-        curve: Curves.easeInOut, 
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
           color: isSelected ? accentBrown : Colors.white,
@@ -215,9 +232,15 @@ class _DetailPageState extends State<DetailPage> {
             color: isSelected ? accentBrown : const Color(0xFFEAEAEA),
             width: 2,
           ),
-          boxShadow: isSelected 
-            ? [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, 4))]
-            : [],
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ]
+              : [],
         ),
         child: Text(
           size,

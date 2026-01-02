@@ -8,7 +8,7 @@ class Productlistview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Consistent Brand Colors
+
     const coffeeBrown = Color(0xFF4B2E1E); 
     const cardColor = Colors.white; 
     const titleColor = Color(0xFF4B2E1E);
