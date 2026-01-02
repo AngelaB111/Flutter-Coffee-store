@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class DetailPage extends StatefulWidget {
   final String title;
@@ -77,9 +78,9 @@ class _DetailPageState extends State<DetailPage> {
           style: TextStyle(color: primaryBrown, fontWeight: FontWeight.bold),
         ),
       ),
-      body: SafeArea(
+      body: Padding(
+        padding: const EdgeInsets.all(20),
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
           child: Card(
             color: Colors.white,
             elevation: 8,
@@ -101,56 +102,38 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 20),
-
-                  AnimatedOpacity(
-                    duration: const Duration(milliseconds: 400),
-                    opacity: 1,
-                    child: Text(
-                      widget.title,
-                      style: TextStyle(
-                        fontSize: 28,
-                        color: primaryBrown,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Text(
+                    widget.title,
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: primaryBrown,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-
                   const SizedBox(height: 10),
-
                   Text(
                     widget.description,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16, color: secondaryBrown),
                   ),
-
                   const SizedBox(height: 25),
-
-                  AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    child: Text(
-                      "\$${price.toStringAsFixed(2)}",
-                      key: ValueKey(price),
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: primaryBrown,
-                        fontWeight: FontWeight.w700,
-                      ),
+                  Text(
+                    "\$${price.toStringAsFixed(2)}",
+                    style: TextStyle(
+                      fontSize: 22,
+                      color: primaryBrown,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-
                   const SizedBox(height: 15),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       _qtyBtn(Icons.remove_circle_outline, () {
                         if (quantity > 1) {
-                          setState(() {
-                            quantity--;
-                            updatePrice();
-                          });
+                          quantity--;
+                          updatePrice();
                         }
                       }),
                       Padding(
@@ -164,17 +147,12 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                       ),
                       _qtyBtn(Icons.add_circle_outline, () {
-                        setState(() {
-                          quantity++;
-                          updatePrice();
-                        });
+                        quantity++;
+                        updatePrice();
                       }),
                     ],
                   ),
-
                   const SizedBox(height: 25),
-
-    
                   Wrap(
                     spacing: 10,
                     children: [
@@ -210,7 +188,6 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget _sizeBtn(String size) {
     final isSelected = selectedSize == size;
-
     return GestureDetector(
       onTap: () => selectSize(size),
       child: AnimatedContainer(

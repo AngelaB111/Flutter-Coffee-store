@@ -13,7 +13,7 @@ class Productlist extends StatefulWidget {
 }
 
 class _ProductlistState extends State<Productlist> {
-  List<Map<String, String>> products = []; 
+  List<Map<String, String>> products = [];
   bool isLoading = true;
 
   @override
@@ -33,12 +33,16 @@ class _ProductlistState extends State<Productlist> {
         final List<dynamic> data = json.decode(response.body);
 
         setState(() {
-          products = data.map<Map<String, String>>((item) => {
-                "Title": item['name'].toString(),
-                "subtitle": item['price'].toString(),
-                "description": item['description'].toString(),
-                "Image": item['image'].toString(),
-              }).toList();
+          products = data
+              .map<Map<String, String>>(
+                (item) => {
+                  "Title": item['name'].toString(),
+                  "subtitle": item['price'].toString(),
+                  "description": item['description'].toString(),
+                  "Image": item['image'].toString(),
+                },
+              )
+              .toList();
           isLoading = false;
         });
       } else {
