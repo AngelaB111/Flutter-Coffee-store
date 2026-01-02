@@ -11,15 +11,15 @@ class Home1 extends StatelessWidget {
           clipper: BottomWaveClipper(),
           child: Container(
             width: double.infinity,
-            height: 300,
+            height: 500,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Color(0xFF3E2723), 
-                  Color(0xFF6F4E37), 
-                  Color(0xFFD7B899), 
+                  Color(0xFF3E2723),
+                  Color(0xFF6F4E37),
+                  Color(0xFFD7B899),
                 ],
               ),
             ),
@@ -28,10 +28,7 @@ class Home1 extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.black.withOpacity(0.5),
-                    Colors.transparent,
-                  ],
+                  colors: [Colors.black.withOpacity(0.5), Colors.transparent],
                 ),
               ),
             ),
@@ -67,10 +64,10 @@ class Home1 extends StatelessWidget {
                 ],
               ),
 
-              SizedBox(height: 30),
+              SizedBox(height: 90),
 
               Text(
-                "Great coffee for\nsome joy",
+                "Great coffee for some joy",
                 style: TextStyle(
                   fontSize: 30,
                   height: 1.2,

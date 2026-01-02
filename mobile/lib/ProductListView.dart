@@ -22,7 +22,7 @@ class Productlistview extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
-        childAspectRatio: 0.85,
+        childAspectRatio: 0.70,
       ),
       itemBuilder: (context, index) {
         final product = products[index];
@@ -33,6 +33,7 @@ class Productlistview extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side: BorderSide(color: Colors.grey.withOpacity(0.1), width: 1),
+            
           ),
           child: InkWell(
             borderRadius: BorderRadius.circular(20),
