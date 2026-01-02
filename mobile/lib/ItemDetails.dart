@@ -95,12 +95,16 @@ class _DetailPageState extends State<DetailPage> {
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
               child: Column(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Image.asset(
-                      widget.image,
-                      height: screenHeight * 0.3,
-                      fit: BoxFit.contain,
+                  // HERO ANIMATION ADDED HERE
+                  Hero(
+                    tag: widget.title, 
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        widget.image,
+                        height: screenHeight * 0.3,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -137,8 +141,10 @@ class _DetailPageState extends State<DetailPage> {
                     children: [
                       _buildQuantityBtn(Icons.remove_circle_outline, () {
                         if (quantity > 1) {
-                          quantity--;
-                          updatePrice(quantity);
+                          setState(() {
+                            quantity--;
+                            updatePrice(quantity);
+                          });
                         }
                       }),
                       Container(
@@ -150,12 +156,16 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                       ),
                       _buildQuantityBtn(Icons.add_circle_outline, () {
-                        quantity++;
-                        updatePrice(quantity);
+                        setState(() {
+                          quantity++;
+                          updatePrice(quantity);
+                        });
                       }),
                     ],
                   ),
                   const SizedBox(height: 25),
+                  
+                  // ANIMATED SIZE BUTTONS
                   Wrap(
                     spacing: 10,
                     alignment: WrapAlignment.center,
@@ -192,15 +202,31 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget _buildSizeBtn(String size) {
     bool isSelected = selectedSize == size;
-    return ElevatedButton(
-      onPressed: () => selectSize(size),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: isSelected ? accentBrown : primaryBrown,
-        foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        elevation: isSelected ? 4 : 0,
+    return GestureDetector(
+      onTap: () => selectSize(size),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300), 
+        curve: Curves.easeInOut, 
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        decoration: BoxDecoration(
+          color: isSelected ? accentBrown : Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isSelected ? accentBrown : const Color(0xFFEAEAEA),
+            width: 2,
+          ),
+          boxShadow: isSelected 
+            ? [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, 4))]
+            : [],
+        ),
+        child: Text(
+          size,
+          style: TextStyle(
+            color: isSelected ? Colors.white : primaryBrown,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
-      child: Text(size),
     );
   }
 }

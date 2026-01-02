@@ -5,63 +5,114 @@ class Home1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 400,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/background.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
 
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          SizedBox(height: 20),
-          Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                "Great coffee for some joy",
+    const Color primaryBrown = Color(0xFF4B2E1E);
+
+    return Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          height: 280, 
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/background.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.black.withOpacity(0.6),
+                  Colors.black.withOpacity(0.1),
+                ],
+              ),
+            ),
+          ),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 60), 
+
+              const Text(
+                "Location",
+                style: TextStyle(color: Colors.white70, fontSize: 12),
+              ),
+              const Row(
+                children: [
+                  Text(
+                    "Beirut, Lebanon",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Colors.white,
+                    size: 18,
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 25),
+
+              const Text(
+                "Great coffee for\nsome joy",
                 style: TextStyle(
-                  fontSize: 26,
+                  fontSize: 28,
+                  height: 1.2,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  shadows: [
-                    Shadow(
-                      offset: Offset(5, 5),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+              Container(
+                height: 55,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF313131),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
                       blurRadius: 10,
-                      color: Color(0xFF502929),
+                      offset: const Offset(0, 5),
                     ),
                   ],
                 ),
-              ),
-            ),
-          ),
-          SizedBox(height: 8),
-          Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                "Start your day with a freshly brewed coffee and a little joy",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  shadows: [
-                    Shadow(
-                      offset: Offset(5, 5),
-                      blurRadius: 10,
-                      color: Color(0xFF502929),
+                child: TextField(
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    hintText: "Search coffee...",
+                    hintStyle: TextStyle(color: Colors.grey),
+                    prefixIcon: Icon(Icons.search, color: Colors.white),
+                    suffixIcon: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: primaryBrown,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Icon(Icons.tune, color: Colors.white),
+                      ),
                     ),
-                  ],
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(vertical: 15),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-          SizedBox(height: 20),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

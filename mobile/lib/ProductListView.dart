@@ -4,104 +4,132 @@ import 'package:mobile/ItemDetails.dart';
 class Productlistview extends StatelessWidget {
   final List<Map<String, String>> products;
 
-  Productlistview({super.key, required this.products});
+  const Productlistview({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
-    const coffeeBrown = Color(0xFF774B31);
-    const cardColor = Color(0xFFDCC6B3);
+    // Consistent Brand Colors
+    const coffeeBrown = Color(0xFF4B2E1E); 
+    const cardColor = Colors.white; 
     const titleColor = Color(0xFF4B2E1E);
     const subtitleColor = Color(0xFF7B5E4A);
-    return Column(
-      children: products.map((product) {
-        return
-        Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child:   Card(
+
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      itemCount: products.length,
+      itemBuilder: (context, index) {
+        final product = products[index];
+
+        return Card(
           color: cardColor,
+          margin: const EdgeInsets.symmetric(vertical: 10),
+          elevation: 2,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(color: Colors.grey.withOpacity(0.1), width: 1),
           ),
-          elevation: 4,
-          margin: const EdgeInsets.symmetric(vertical: 8),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    product["Image"]!,
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.cover,
+          child: InkWell( 
+            borderRadius: BorderRadius.circular(20),
+            onTap: () => _navigateToDetail(context, product),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 10,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        product["Image"] ?? 'assets/placeholder.png', 
+                        width: 90,
+                        height: 90,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        product["Title"]!,
-                        style: const TextStyle(
-                          color: titleColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        "\$${product["subtitle"]!}",
-                        style: const TextStyle(
-                          color: subtitleColor,
-                          fontSize: 14,
-                        ),
-                      ),
-                      const SizedBox(height: 3),
-                      Text(
-                        product["description"]!,
-                        style: const TextStyle(
-                          color: Color.fromARGB(255, 167, 145, 131),
-                          fontSize: 10,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: coffeeBrown,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 6,
+                  const SizedBox(width: 15),
+                  
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          product["Title"] ?? "Unknown Coffee",
+                          style: const TextStyle(
+                            color: titleColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailPage(
-                              title: product["Title"]!,
-                              subtitle: product["subtitle"]!,
-                              description: product["description"]!,
-                              image: product["Image"]!,
+                        const SizedBox(height: 4),
+                        Text(
+                          product["description"] ?? "",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "\$${product["subtitle"] ?? "0.00"}",
+                              style: const TextStyle(
+                                color: subtitleColor,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 16,
+                              ),
                             ),
-                          ),
-                        );},
-                        child: const Text(
-                          "See Details",
-                          style: TextStyle(color: Colors.white),
+                            Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: coffeeBrown,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ), );
-      }).toList(),
+        );
+      },
+    );
+  }
+
+  void _navigateToDetail(BuildContext context, Map<String, String> product) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailPage(
+          title: product["Title"] ?? "Coffee",
+          subtitle: product["subtitle"] ?? "0.00",
+          description: product["description"] ?? "",
+          image: product["Image"] ?? 'assets/placeholder.png',
+        ),
+      ),
     );
   }
 }
