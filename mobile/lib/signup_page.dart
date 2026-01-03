@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mobile/login_page.dart';
 import 'theme/colors.dart';
 
 class SignupPage extends StatefulWidget {
@@ -97,7 +98,21 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       child: loading
                           ? const CircularProgressIndicator(color: Colors.white)
-                          : const Text("Sign Up"),
+                          : const Text("Sign Up", style: TextStyle(color: Color.fromARGB(212, 255, 255, 255)),),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const LoginPage()),
+                      );
+                    },
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(color: lightBrown),
                     ),
                   ),
                 ],
