@@ -1,21 +1,18 @@
-# ☕ Coffee Store
+☕ **Coffee O'Clock** 
+A sleek, responsive coffee shop application built with Flutter. This project focuses on a high-end "dark mode" aesthetic, utilizing reusable components and efficient state management for a premium shopping experience.
 
-Welcome to **Coffee Store**, your go-to web application for exploring and ordering your favorite coffee blends online. This project demonstrates a modern, user-friendly interface for coffee enthusiasts to browse, select, and learn more about different coffee products.
+🚀 **Features**
+Dynamic Product Catalog: A modular grid system displaying various coffee blends with detailed descriptions.
+Login/Signup : Create an account and login.
 
-## Features
 
-- Browse a variety of coffee blends with descriptions.
-- View prices and detailed product information.
+## 📱 App Screenshots
 
-## Technologies Used
+| Home Page | Home Page | Details Page |
+|---|---|---|
+| ![Home](images/home.png) | ![Home](images/home1.png) | ![Details](images/details.png) |
 
-**Flutter**
-
-## Screenshots
-
-<img src="images/home.png" alt="Home Page" width="300" />
-
-<img src="images/about.png" alt="about Page" width="300"/>
-
-<img src="images/product.png" alt="Product Page" width="300"/>
-
+ 
+| Login  | Signup | 
+|---|---|
+| ![Login](images/login.png) | ![Signup](images/signup.png) |
