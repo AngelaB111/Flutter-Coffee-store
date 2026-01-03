@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/ProductList.dart';
+import 'package:mobile/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const Productlist(),
+      home: const LoginPage(),
     );
   }
 }
