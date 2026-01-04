@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/about.dart';
 import 'package:mobile/Home1.dart';
+import 'package:mobile/cart_page.dart';
 import 'package:mobile/ProductListView.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -70,6 +71,18 @@ class _ProductlistState extends State<Productlist> {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+  IconButton(
+    icon: const Icon(Icons.shopping_cart),
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const CartPage()),
+      );
+    },
+  ),
+]
+
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -101,6 +114,7 @@ class _ProductlistState extends State<Productlist> {
                 ],
               ),
             ),
+            
       bottomNavigationBar: Container(
         color: coffeeBrown,
         padding: const EdgeInsets.all(16),

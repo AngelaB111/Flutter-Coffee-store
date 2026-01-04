@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:mobile/cart_page.dart';
+import 'cart_provider.dart';
+import 'cart_item.dart';
 
 class DetailPage extends StatefulWidget {
   final String title;
@@ -76,6 +80,17 @@ class _DetailPageState extends State<DetailPage> {
           "Coffee O'Clock",
           style: TextStyle(color: primaryBrown, fontWeight: FontWeight.bold),
         ),
+          actions: [
+  IconButton(
+    icon: const Icon(Icons.shopping_cart),
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const CartPage()),
+      );
+    },
+  ),
+]
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -166,15 +181,37 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        color: primaryBrown,
-        padding: const EdgeInsets.all(15),
-        child: const Text(
-          "© 2025 Coffee O'Clock",
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white),
-        ),
+     bottomNavigationBar: Padding(
+  padding: const EdgeInsets.all(15),
+  child: ElevatedButton(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: primaryBrown,
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(14),
       ),
+    ),
+    onPressed: () {
+      Provider.of<CartProvider>(context, listen: false).addToCart(
+        CartItem(
+          title: widget.title,
+          image: widget.image,
+          size: selectedSize,
+          unitPrice: currentBasePrice,
+          quantity: quantity,
+        ),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Added to cart 🛒")),
+      );
+    },
+    child: const Text(
+      "Add to Cart",
+      style: TextStyle(fontSize: 18, color: Colors.white),
+    ),
+  ),
+),
     );
   }
 
