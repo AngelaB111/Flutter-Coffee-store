@@ -13,6 +13,6 @@ Login/Signup : Create an account and login.
 | ![Home](images/home.png) | ![Home](images/home1.png) | ![Details](images/details.png) |
 
  
-| Login  | Signup | 
-|---|---|
-| ![Login](images/login.png) | ![Signup](images/signup.png) |
+| Login  | Signup | Cart |
+|---|---|---|
+| ![Login](images/login.png) | ![Signup](images/signup.png) |![Cart](images/cart.png)|
